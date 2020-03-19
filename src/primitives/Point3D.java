@@ -12,7 +12,6 @@ public class Point3D {
 
     /*********** Constructors ***********/
 
-
     /**
      * Constructor for creating a point by input of other point
      *
@@ -47,7 +46,7 @@ public class Point3D {
     }
 
 
-    /*********** getters and setters ***********/
+    /*********** getters ***********/
     /**
      * @return new Coordinate with _x value
      */
@@ -62,20 +61,6 @@ public class Point3D {
     public Coordinate get_z() {
         return new Coordinate(_z);
     }
-
-    public void set_x(Coordinate _x) {
-        this._x = new Coordinate(_x);
-    }
-
-    public void set_y(Coordinate _y) {
-        this._y = new Coordinate(_y);
-    }
-
-    public void set_z(Coordinate _z) {
-        this._z = new Coordinate(_z);
-    }
-
-
 
     /*************** Admin *****************/
     @Override
