@@ -1,23 +1,27 @@
 package geometries;
 
-import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
 
+import java.util.IllegalFormatWidthException;
+
 import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
-public abstract class RadialGeometry implements Geometry{
+
+/**
+ * Radial Geometry represent all the 3D geometry objects which including the param radius
+ */
+public abstract class RadialGeometry implements Geometry {
+
     double _radius;
-
-
 
     /**
      *  Radial Geometry constructor receiving a radius value
      * @param radius radius value
      */
-    public  RadialGeometry(double radius) {
-        // if it too close to zero make it zero
-        this._radius = alignZero(radius);
+    public RadialGeometry(double radius) {
+        this._radius = alignZero(radius); // if it too close to zero make it zero
     }
 
     /**

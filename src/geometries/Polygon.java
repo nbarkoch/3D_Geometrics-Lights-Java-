@@ -18,7 +18,7 @@ public class Polygon implements Geometry {
      */
     protected List<Point3D> _vertices;
     /**
-     * Associated plane in which the polygon lays
+     * Associated plane in which the polygon lays.
      */
     protected Plane _plane;
 

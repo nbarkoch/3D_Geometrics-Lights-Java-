@@ -109,7 +109,7 @@ public class Vector {
 
     /**
      * dotProduct
-     * @param other Vector
+     * @param other The second Vector which we about to do on him the dot product
      * @return dot product (double)
      */
     public double dotProduct(Vector other) {
@@ -120,8 +120,8 @@ public class Vector {
 
     /**
      * Vector Multiplier - Returns a new vector that is perpendicular to the two existing vectors (cross-product)
-     * @param _vector
-     * @return Vector for crossproduct using right thumb rule
+     * @param _vector the other Vector which we about to do on him the cross product
+     * @return Vector for cross product using right thumb rule
      */
     public Vector crossProduct(Vector _vector) {
         return new Vector(this._head._y.get()*_vector._head._z.get() - this._head._z.get()*_vector._head._y.get(),

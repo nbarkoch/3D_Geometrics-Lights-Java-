@@ -2,6 +2,10 @@ package geometries;
 
 import primitives.Point3D;
 
+/**
+ * Class Triangle is the basic geometric structure which consists of three points in space. The sum of all internal angles
+ * in a triangle is always 180 degrees.
+ */
 public class Triangle extends Polygon {
 
     /**
