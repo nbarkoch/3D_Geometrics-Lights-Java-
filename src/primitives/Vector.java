@@ -1,4 +1,5 @@
 package primitives;
+import static primitives.Util.isZero;
 
 /**
  * Class Vector is basic object in geometry of direction and size, defined by the end point
@@ -9,7 +10,7 @@ public class Vector {
 
     public final static Vector ZERO = new Vector(new Point3D(0.0, 0.0, 0.0));
 
-    /*********** Constructors ***********/
+    //*********** Constructors ***********//
 
     /**
      * Constructor for creating a vector from a Vector
@@ -155,6 +156,8 @@ public class Vector {
      * @return the vector after it normalized
      */
     public Vector normalize(){
+        if(isZero(length())) // if we try to normalize vector ZERO
+            return this; // can't davide by zero
         this._head = scale(1/length())._head;
         return this;
     }
