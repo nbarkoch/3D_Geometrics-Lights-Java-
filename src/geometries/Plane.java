@@ -3,6 +3,8 @@ package geometries;
 import primitives.Point3D;
 import primitives.Vector;
 
+import static primitives.Point3D.ZERO;
+
 /**
  * Class Plane is 2D basic object in geometry which represented by two vectors which come from the same point and
  * have different directions (together reflecting the basic 2D object.)
@@ -11,7 +13,6 @@ import primitives.Vector;
 public class Plane implements Geometry {
     Point3D _p;
     Vector _normal;
-
     /**
      * Plane constructor must be defined here by three vectors, one of them represent the beginning point,
      * and the two others represent the normal vector
@@ -45,6 +46,6 @@ public class Plane implements Geometry {
     }
 
     public Vector getNormal() {
-        return getNormal(Vector.ZERO.get_head());
+        return getNormal(ZERO);
     }
 }

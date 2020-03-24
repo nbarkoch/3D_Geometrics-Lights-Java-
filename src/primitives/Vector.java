@@ -1,5 +1,6 @@
 package primitives;
 import static primitives.Util.isZero;
+import static primitives.Point3D.ZERO;
 
 /**
  * Class Vector is basic object in geometry of direction and size, defined by the end point
@@ -8,7 +9,7 @@ import static primitives.Util.isZero;
 public class Vector {
     Point3D _head;
 
-    public final static Vector ZERO = new Vector(new Point3D(0.0, 0.0, 0.0));
+    //public final static Vector ZERO = new Vector(new Point3D(0.0, 0.0, 0.0));
 
     //*********** Constructors ***********//
 
@@ -26,7 +27,7 @@ public class Vector {
      * @throws IllegalArgumentException in any case of the head point input is the beginning of the axes
      */
     public Vector(Point3D _head) throws IllegalArgumentException {
-        if (ZERO != null && _head.equals(ZERO._head)) // first the will create the vector zero, next time there's shouldn't more than he.
+        if (_head.equals(ZERO))
             throw new IllegalArgumentException("A vector can't have head point to be the ZERO point");
         this._head = new Point3D(_head);
     }
@@ -135,9 +136,7 @@ public class Vector {
      * @return the number representing the sum of values in the vector's head point, squared
      */
     public double lengthSquared(){
-        return this._head._x.get()*this._head._x.get()+
-                this._head._y.get()*this._head._y.get()+
-                this._head._z.get()*this._head._z.get();
+        return dotProduct(this);
     }
 
     /**

@@ -9,6 +9,7 @@ public class Point3D {
     Coordinate _x;
     Coordinate _y;
     Coordinate _z;
+    public final static Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
 
     /*********** Constructors ***********/
 
