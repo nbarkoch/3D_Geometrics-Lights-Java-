@@ -1,25 +1,19 @@
 package primitives;
+import geometries.Tube;
+
 import static primitives.Util.isZero;
 import static primitives.Point3D.ZERO;
 
 /**
  * Class Vector is basic object in geometry of direction and size, defined by the end point
- * (where a starting point is the beginning of the axes)
+ * (where a starting point is the beginning of the axis)
  */
 public class Vector {
+
     Point3D _head;
 
-    //public final static Vector ZERO = new Vector(new Point3D(0.0, 0.0, 0.0));
 
     //*********** Constructors ***********//
-
-    /**
-     * Constructor for creating a vector from a Vector
-     * @param _vector Vector representing the vector to build as new one
-     */
-    public Vector(Vector _vector) {
-        this._head = new Point3D(_vector._head);
-    }
 
     /**
      * Constructor for creating a vector from a Point3D
@@ -55,6 +49,17 @@ public class Vector {
     }
 
     /**
+     * Copy Constructor for creating a vector from a Vector
+     * @param _vector Vector representing the vector to build as new one
+     */
+    public Vector(Vector _vector) {
+        this._head = new Point3D(_vector._head);
+    }
+
+
+    //********** Getters ***********/
+
+    /**
      * Vector value getter
      * @return head of vector value in Point3D representation
      */
@@ -62,22 +67,9 @@ public class Vector {
         return new Point3D(_head);
     }
 
-    /*************** Admin *****************/
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vector other_vector = (Vector) o;
-        return this._head.equals(other_vector._head);
-    }
 
-    @Override
-    public String toString() {
-        return "(Vector{)" +
-                "_head=" + _head +
-                '}';
-    }
+    //********** Calculation methods ***********/
 
     /**
      * Vector Subtraction: Subtraction between two vectors returns a vector with direction from the subtract head point
@@ -147,7 +139,6 @@ public class Vector {
         return Math.sqrt(this.lengthSquared());
     }
 
-
     /**
      * The vector normalization action changes the vector itself
      * (the only action that changes the object on which it was summoned)
@@ -168,5 +159,23 @@ public class Vector {
      */
     public Vector normalized(){
         return (new Vector(this)).normalize();
+    }
+
+
+    /*************** Admin *****************/
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof Vector)) return false;
+        Vector other_vector = (Vector) obj;
+        return this._head.equals(other_vector._head);
+    }
+
+    @Override
+    public String toString() {
+        return "(Vector{)" +
+                "_head=" + _head +
+                '}';
     }
 }

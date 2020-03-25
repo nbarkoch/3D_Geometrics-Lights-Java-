@@ -15,6 +15,10 @@ public final class Coordinate {
      */
     final double _coord; // readonly, is internal
 
+
+
+    //********** Constructors ***********/
+
     /**
      * Coordinate constructor receiving a coordinate value
      *
@@ -27,23 +31,28 @@ public final class Coordinate {
 
     /**
      * Copy constructor for coordinate
-     *
-     * @param other Coordinate
+     * @param other Coordinate for deep copy values
      */
     public Coordinate(Coordinate other) {
         _coord = other._coord;
     }
 
+
+
+    //********** Getters ***********/
+
     /**
      * Coordinate value getter
-     *
      * @return coordinate value in double representation
      */
     public double get() {
         return _coord;
     }
 
+
+
     /*************** Admin *****************/
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

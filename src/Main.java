@@ -1,6 +1,15 @@
+// @submitters:
+// Naor Bar Kochva
+// 206295305
+// naorbarkochva@gmail.com
+// Yichai Hazan
+// 1669535
+// hazanyichai@gmail.com
+
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
+//import geometries.Sphere;
 
 /**
  * Test program for the 1st stage
@@ -60,8 +69,11 @@ public final class Main {
             out.println("ERROR: normalize() result is not a unit vector");
         Vector u = v.normalized();
         if (u == v)
-            out.println("ERROR: normalizated() function does not create a new vector");
+            out.println("ERROR: normalized() function does not create a new vector");
 
         out.println("If there were no any other outputs - all tests succeeded!");
+
+        //Sphere sp = new Sphere(v.get_head(),2.222);
+        //sp.get_radius();
     }
 }

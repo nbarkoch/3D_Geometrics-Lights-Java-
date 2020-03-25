@@ -1,26 +1,19 @@
 package primitives;
 
-import java.util.Objects;
-
 /**
- * Point3D: class for representing a point in 3D environment
+ * Point3D: class for representing a point in 3D dimension
+ * represented by three coordinates (places on x y and z axises)
  */
 public class Point3D {
     Coordinate _x;
     Coordinate _y;
     Coordinate _z;
+    // static readonly member point called ZERO
     public final static Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
 
-    /*********** Constructors ***********/
 
-    /**
-     * Constructor for creating a point by input of other point
-     *
-     * @param _point representing a point, including three coordinates
-     */
-    public Point3D(Point3D _point) {
-        this(_point._x.get(), _point._y.get(), _point._z.get());
-    }
+
+    //********** Constructors ***********/
 
     /**
      * Constructor for creating a point by input of three coordinates
@@ -46,8 +39,18 @@ public class Point3D {
         this(new Coordinate(x), new Coordinate(y), new Coordinate(z));
     }
 
+    /**
+     * Copy Constructor for creating a point by input of other point
+     * @param _point representing a point, including three coordinates
+     */
+    public Point3D(Point3D _point) {
+        this(_point._x.get(), _point._y.get(), _point._z.get());
+    }
 
-    /*********** getters ***********/
+
+
+    //********** Getters ***********/
+
     /**
      * @return new Coordinate with _x value
      */
@@ -63,25 +66,9 @@ public class Point3D {
         return new Coordinate(_z);
     }
 
-    /*************** Admin *****************/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;                       // step 1 - we are talking about the same point
-        if (o == null || getClass() != o.getClass())
-            return false;                                 // step 2 - we are talking about object which isn't a point or null
-        Point3D point3D = (Point3D) o;                    // step 3 - let's treat it as a point, and check coordinates
-        return this._x.equals(point3D._x) &&
-                this._y.equals(point3D._y) &&
-                this._z.equals(point3D._z);
-    }
 
-    @Override
-    public String toString() {
-        return "(" + _x +
-                ", " + _y +
-                ", " + _z +
-                ')';
-    }
+
+    //********** Calculation methods ***********/
 
     /**
      * Vector Subtraction: Subtraction between two points returns a vector with direction from the subtract to the subtracted
@@ -124,5 +111,28 @@ public class Point3D {
      */
     public double distance(Point3D other_point){
         return Math.sqrt(distanceSquared(other_point));
+    }
+
+
+
+    /*************** Admin *****************/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;                       // step 1 - we are talking about the same point
+        if (o == null || getClass() != o.getClass())
+            return false;                                 // step 2 - we are talking about object which isn't a point or null
+        Point3D point3D = (Point3D) o;                    // step 3 - let's treat it as a point, and check coordinates
+        return this._x.equals(point3D._x) &&
+                this._y.equals(point3D._y) &&
+                this._z.equals(point3D._z);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + _x +
+                ", " + _y +
+                ", " + _z +
+                ')';
     }
 }

@@ -1,12 +1,28 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Vector;
 
 /**
  * Class Triangle is the basic geometric structure which consists of three points in space. The sum of all internal angles
- * in a triangle is always 180 degrees.
+ * in a triangle is always 180&#176; (degrees).
+ *
+ * <p>note:</p>
+ *       <ul>
+ *       <li>we prefer to implement triangle by composition more than inheritance</li>
+ *       <li>furthermore, class Triangle isn't kind of Plane.</li>
+ *       </ul>
+ *       which means that we will have:
+ *       <ul>
+ *       <li>three points for definition, and not inheritance of class Plane.</li>
+ *       <li>Triangle is kind of Polygon, that's why we can do inheritance from this class.</li>
+ *       </ul>
  */
 public class Triangle extends Polygon {
+
+
+
+    //*********** Constructors ***********//
 
     /**
      * Constructor of Triangle
@@ -16,5 +32,37 @@ public class Triangle extends Polygon {
      */
     public Triangle(Point3D vertex, Point3D vertex1, Point3D vertex2) {
         super(new Point3D[]{vertex, vertex1, vertex2});
+    }
+
+    /*************** Admin *****************/
+
+    // still not quit sure if class Triangle shouldn't use the equal method which about to be made in polygon class
+    // instead of this one
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof Triangle)) return false;
+        Triangle other_triangle = (Triangle) obj;
+        boolean flag;
+        for(Point3D vertex : _vertices){
+            flag = false;
+            for (Point3D others_vertex : other_triangle._vertices)
+                if (others_vertex.equals(vertex))
+                {
+                    flag = true;
+                    break;
+                }
+            if (!flag)
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for(Point3D vertex : _vertices)
+            output = output + " " + vertex;
+        return output;
     }
 }

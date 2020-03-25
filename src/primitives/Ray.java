@@ -8,7 +8,9 @@ public class Ray {
     Point3D _p00;
     Vector _direction;
 
-    /*********** Constructors ***********/
+
+
+    //********** Constructors ***********/
 
     /**
      * Constructor for creating a ray
@@ -21,6 +23,18 @@ public class Ray {
         this._direction = _direction.normalized();
     }
 
+    /**
+     * Copy constructor for a deep copy of an Ray object.
+     * @param ray the ray which been copied
+     */
+    public Ray(Ray ray) {
+        this._p00 = new Point3D(ray._p00);
+        this._direction = ray._direction.normalized();
+    }
+
+
+    //********** Getters ***********/
+
     public Point3D get_p00() {
         return new Point3D(_p00);
     }
@@ -28,6 +42,10 @@ public class Ray {
     public Vector get_direction() {
         return new Vector (_direction);
     }
+
+
+
+    /*************** Admin *****************/
 
     @Override
     public boolean equals(Object o) {

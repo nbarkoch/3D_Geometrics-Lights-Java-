@@ -1,12 +1,6 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Vector;
-
-import java.util.IllegalFormatWidthException;
-
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
 
 
 /**
@@ -40,8 +34,4 @@ public abstract class RadialGeometry implements Geometry {
         return _radius;
     }
 
-    @Override
-    public Vector getNormal(Point3D _point) {
-        return null;
-    }
 }
