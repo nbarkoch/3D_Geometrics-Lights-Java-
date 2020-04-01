@@ -51,11 +51,9 @@ public class Plane implements Geometry {
      */
     public Point3D get_p() {return new Point3D(_p);}
 
-    // TODO: implementation
     @Override
     public Vector getNormal(Point3D _point) {
-        return null;
-        //return new Vector(_normal);
+        return new Vector(_normal);
     }
 
     // polygon get no input

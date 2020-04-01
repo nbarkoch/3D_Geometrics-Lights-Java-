@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import static primitives.Util.isZero;
+
 /**
  * Class Cylinder represent a smooth surface which defined with length, curvature at every point on its face fixed.
  * Represented by ray and radius, (direction, first and second points, radius)
@@ -37,10 +39,16 @@ public class Cylinder extends Tube{
      */
     public double get_height() { return _height;}
 
-    // TODO: implementation
     @Override
     public Vector getNormal(Point3D p) {
-        return null;
+        double t = _axisRay.get_direction().dotProduct(p.subtract(_axisRay.get_p00()));
+        if(isZero(t - _height)) // if point located on upper base
+            return _axisRay.get_direction().normalize();
+        else if(isZero(t))  // if point located in lower base
+            return _axisRay.get_direction().normalize().scale(-1);
+        // >>> of course if height is less than t than throw exception - the point doesn't on the surface
+        Point3D o = _axisRay.get_p00().add(_axisRay.get_direction().scale(t)); // if point located on the side
+        return p.subtract(o).normalize(); //.scale(-1); ?
     }
 
 
@@ -52,7 +60,7 @@ public class Cylinder extends Tube{
         if (obj == null ) return false;
         if (!(obj instanceof Cylinder)) return  false;
         Cylinder other_cylinder = (Cylinder ) obj;
-        return (Util.isZero(this._height - other_cylinder._height)) &&
+        return (isZero(this._height - other_cylinder._height)) &&
                 (this._axisRay.get_p00().equals(other_cylinder._axisRay.get_p00())) &&
                 super.equals(other_cylinder);
     }

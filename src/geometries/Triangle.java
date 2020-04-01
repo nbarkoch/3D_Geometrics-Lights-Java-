@@ -19,9 +19,6 @@ import primitives.Vector;
  *       </ul>
  */
 public class Triangle extends Polygon {
-
-
-
     //*********** Constructors ***********//
 
     /**
