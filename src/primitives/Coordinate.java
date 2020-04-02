@@ -16,7 +16,6 @@ public final class Coordinate {
     final double _coord; // readonly, is internal
 
 
-
     //********** Constructors ***********/
 
     /**
@@ -31,6 +30,7 @@ public final class Coordinate {
 
     /**
      * Copy constructor for coordinate
+     *
      * @param other Coordinate for deep copy values
      */
     public Coordinate(Coordinate other) {
@@ -38,17 +38,16 @@ public final class Coordinate {
     }
 
 
-
     //********** Getters ***********/
 
     /**
      * Coordinate value getter
+     *
      * @return coordinate value in double representation
      */
     public double get() {
         return _coord;
     }
-
 
 
     /*************** Admin *****************/

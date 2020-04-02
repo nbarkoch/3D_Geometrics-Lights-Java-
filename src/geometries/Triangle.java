@@ -6,27 +6,27 @@ import primitives.Vector;
 /**
  * Class Triangle is the basic geometric structure which consists of three points in space. The sum of all internal angles
  * in a triangle is always 180&#176; (degrees).
- *
- * <p>note:</p>
- *       <ul>
- *       <li>we prefer to implement triangle by composition more than inheritance</li>
- *       <li>furthermore, class Triangle isn't kind of Plane.</li>
- *       </ul>
- *       which means that we will have:
- *       <ul>
- *       <li>three points for definition, and not inheritance of class Plane.</li>
- *       <li>Triangle is kind of Polygon, that's why we can do inheritance from this class.</li>
- *       </ul>
+ * <p>
+ * e:</p>
+ * <ul>
+ * <li>we prefer to implement triangle by composition more than inheritance</li>
+ * <li>furthermore, class Triangle isn't kind of Plane.</li>
+ * </ul>
+ * which means that we will have:
+ * <ul>
+ * <li>three points for definition, and not inheritance of class Plane.</li>
+ * <li>Triangle is kind of Polygon, that's why we can do inheritance from this class.</li>
+ * </ul>
  */
 public class Triangle extends Polygon {
-
 
 
     //*********** Constructors ***********//
 
     /**
      * Constructor of Triangle
-     * @param vertex first vertex representing the first point of triangle
+     *
+     * @param vertex  first vertex representing the first point of triangle
      * @param vertex1 second vertex representing the second point of triangle
      * @param vertex2 third vertex representing the third and last point of triangle
      */
@@ -44,11 +44,10 @@ public class Triangle extends Polygon {
         if (obj == null || !(obj instanceof Triangle)) return false;
         Triangle other_triangle = (Triangle) obj;
         boolean flag;
-        for(Point3D vertex : _vertices){
+        for (Point3D vertex : _vertices) {
             flag = false;
             for (Point3D others_vertex : other_triangle._vertices)
-                if (others_vertex.equals(vertex))
-                {
+                if (others_vertex.equals(vertex)) {
                     flag = true;
                     break;
                 }
@@ -61,7 +60,7 @@ public class Triangle extends Polygon {
     @Override
     public String toString() {
         String output = "";
-        for(Point3D vertex : _vertices)
+        for (Point3D vertex : _vertices)
             output = output + " " + vertex;
         return output;
     }

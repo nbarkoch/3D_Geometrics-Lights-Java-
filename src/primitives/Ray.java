@@ -9,14 +9,14 @@ public class Ray {
     Vector _direction;
 
 
-
     //********** Constructors ***********/
 
     /**
      * Constructor for creating a ray
-     * @param _p00 point3D representing the beginning of the ray
+     *
+     * @param _p00       point3D representing the beginning of the ray
      * @param _direction vector representing the direction,
-     * by the start point and direction we can find the end point of the ray
+     *                   by the start point and direction we can find the end point of the ray
      */
     public Ray(Point3D _p00, Vector _direction) {
         this._p00 = new Point3D(_p00);
@@ -25,6 +25,7 @@ public class Ray {
 
     /**
      * Copy constructor for a deep copy of an Ray object.
+     *
      * @param ray the ray which been copied
      */
     public Ray(Ray ray) {
@@ -40,9 +41,8 @@ public class Ray {
     }
 
     public Vector get_direction() {
-        return new Vector (_direction);
+        return new Vector(_direction);
     }
-
 
 
     /*************** Admin *****************/

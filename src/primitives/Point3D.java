@@ -12,7 +12,6 @@ public class Point3D {
     public final static Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
 
 
-
     //********** Constructors ***********/
 
     /**
@@ -41,12 +40,12 @@ public class Point3D {
 
     /**
      * Copy Constructor for creating a point by input of other point
+     *
      * @param _point representing a point, including three coordinates
      */
     public Point3D(Point3D _point) {
         this(_point._x.get(), _point._y.get(), _point._z.get());
     }
-
 
 
     //********** Getters ***********/
@@ -67,11 +66,11 @@ public class Point3D {
     }
 
 
-
     //********** Calculation methods ***********/
 
     /**
      * Vector Subtraction: Subtraction between two points returns a vector with direction from the subtract to the subtracted
+     *
      * @param vertex param vertex is the second point
      * @return a vector from the second point to the point at which the action is performed
      */
@@ -84,10 +83,11 @@ public class Point3D {
 
     /**
      * Adding Vector to a Point - Returns a new point, by doing interconnect operation the vector's head point and the point
+     *
      * @param _vector a vector which his point value added to the point
      * @return a new point whose coordinate values are the result of the points interconnect operation
      */
-    public Point3D add(Vector _vector){
+    public Point3D add(Vector _vector) {
         return new Point3D(this._x.get() + _vector._head._x.get(),
                 this._y.get() + _vector._head._y.get(),
                 this._z.get() + _vector._head._z.get());
@@ -95,24 +95,25 @@ public class Point3D {
 
     /**
      * The length between two points squared
+     *
      * @param other_point the second point for calculating th distance
      * @return the number representing the distance squared
      */
-    public double distanceSquared(Point3D other_point){
-        return  (this._x.get() - other_point._x.get())*(this._x.get() - other_point._x.get())+
-                (this._y.get() - other_point._y.get())*(this._y.get() - other_point._y.get())+
-                (this._z.get() - other_point._z.get())*(this._z.get() - other_point._z.get());
+    public double distanceSquared(Point3D other_point) {
+        return (this._x.get() - other_point._x.get()) * (this._x.get() - other_point._x.get()) +
+                (this._y.get() - other_point._y.get()) * (this._y.get() - other_point._y.get()) +
+                (this._z.get() - other_point._z.get()) * (this._z.get() - other_point._z.get());
     }
 
     /**
      * The length between two points
+     *
      * @param other_point the second point for calculating th distance
-     * @return  the number representing the distance
+     * @return the number representing the distance
      */
-    public double distance(Point3D other_point){
+    public double distance(Point3D other_point) {
         return Math.sqrt(distanceSquared(other_point));
     }
-
 
 
     /*************** Admin *****************/
