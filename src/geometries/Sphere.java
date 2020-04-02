@@ -16,10 +16,11 @@ public class Sphere extends RadialGeometry {
 
     /**
      * Constructor for sphere, by entrance of center point and radius
+     *
      * @param center point represent the center of the sphere
      * @param radius radius represent the distance between each point on sphere to the cnter
      */
-    public Sphere(Point3D center, double radius){
+    public Sphere(Point3D center, double radius) {
         super(radius);
         _center = new Point3D(center);
     }
@@ -29,6 +30,7 @@ public class Sphere extends RadialGeometry {
 
     /**
      * get the center point f class sphere
+     *
      * @return the center point of sphere
      */
     public Point3D get_center() {
@@ -41,15 +43,14 @@ public class Sphere extends RadialGeometry {
     }
 
 
-
     /*************** Admin *****************/
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null ) return false;
-        if (!(obj instanceof Sphere)) return  false;
-        Sphere other_sphere = (Sphere)obj;
+        if (obj == null) return false;
+        if (!(obj instanceof Sphere)) return false;
+        Sphere other_sphere = (Sphere) obj;
         return this._center.equals(other_sphere._center) && (Util.isZero(this._radius - other_sphere._radius));
     }
 

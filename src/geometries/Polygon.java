@@ -1,7 +1,9 @@
 package geometries;
 
 import java.util.List;
+
 import primitives.*;
+
 import static primitives.Util.*;
 
 /**
@@ -63,10 +65,8 @@ public class Polygon implements Geometry {
         // line.
         // Generate the direction of the polygon according to the angle between last and
         // first edge being less than 180 deg. It is hold by the sign of its dot product
-        // with
-        // the normal. If all the rest consequent edges will generate the same sign -
-        // the
-        // polygon is convex ("kamur" in Hebrew).
+        // with the normal. If all the rest consequent edges will generate the same sign -
+        // the polygon is convex ("kamur" in Hebrew).
         boolean positive = edge1.crossProduct(edge2).dotProduct(n) > 0;
         for (int i = 1; i < vertices.length; ++i) {
             // Test that the point is in the same plane as calculated originally

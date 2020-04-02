@@ -15,8 +15,8 @@ class SphereTest {
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There are simple tests here
-        Sphere sphere = new Sphere(new Point3D(1,0,0), 3);
-        assertEquals(new Vector(3,0,0).normalize().scale(-1), sphere.getNormal(new Point3D(4,0,0)), "bad normal calculator");
-        assertEquals(new Vector(0,2,0).normalize(), sphere.getNormal(new Point3D(1,-3,0)), "bad normal calculator");
+        Sphere sphere = new Sphere(new Point3D(1, 0, 0), 3);
+        assertEquals(new Vector(3, 0, 0).normalize().scale(-1), sphere.getNormal(new Point3D(4, 0, 0)), "bad normal calculator");
+        assertEquals(new Vector(0, 2, 0).normalize(), sphere.getNormal(new Point3D(1, -3, 0)), "bad normal calculator");
     }
 }

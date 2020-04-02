@@ -20,27 +20,30 @@ public class Tube extends RadialGeometry {
 
     /**
      * Constructor for class Tube,
+     *
      * @param axisRay represent the direction and the place
-     * @param radius the radius from the center line to the surface
+     * @param radius  the radius from the center line to the surface
      */
-    public Tube(Ray axisRay, double radius){
+    public Tube(Ray axisRay, double radius) {
         super(radius);
         _axisRay = new Ray(axisRay);
     }
 
     /**
      * Copy Constructor of class Tube, deep copy of the members: radius, ray
+     *
      * @param tube the tube to do deep copy
      */
-    public Tube(Tube tube){
+    public Tube(Tube tube) {
         super(tube._radius);
         _axisRay = new Ray(tube._axisRay);
     }
 
     //********** Getters ***********/
 
-     /**
+    /**
      * getter to the ray (values of direction and place) which represent the tube
+     *
      * @return value ray of the tube
      */
     public Ray get_axisRay() {
@@ -54,7 +57,7 @@ public class Tube extends RadialGeometry {
         double t = _axisRay.get_direction().dotProduct(p.subtract(_axisRay.get_p00()));
         // for o point we need to add point p00 as a start point to direction t*V
         Point3D o = _axisRay.get_p00();
-        if(!isZero(t))  // we can't create the t*V vector if result with direction ZERO
+        if (!isZero(t))  // we can't create the t*V vector if result with direction ZERO
         {
             // Scalar multiplication with number t and vector of ray
             // will give as a vector representing the direction with length from p0 to point o
@@ -69,21 +72,19 @@ public class Tube extends RadialGeometry {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null ) return false;
+        if (obj == null) return false;
         if (!(obj instanceof Tube)) return false;
         Tube other_tube = (Tube) obj;
         // need same direction, don't need same length
         // compare points of tubes, compare radius and compare directions of tubes (could be -1 from the other but it's the same)
-            try  // two beginning points should be on the same line (crossProduct should give point ZERO as a direction point)
-            {    // if we do (p1 - p2) we get a vector from p2 to p1, it suppose to be the same direction of the two tubes.
-                this._axisRay.get_p00().subtract(other_tube._axisRay.get_p00()).crossProduct(other_tube._axisRay.get_direction());
-            }
-            catch(IllegalArgumentException exception2)
-            {
-                return (isZero(this._radius - other_tube._radius)) &&
-                        (this._axisRay.get_direction().equals(other_tube._axisRay.get_direction())
-                                || this._axisRay.get_direction().equals(other_tube._axisRay.get_direction().scale(-1)));
-            }
+        try  // two beginning points should be on the same line (crossProduct should give point ZERO as a direction point)
+        {    // if we do (p1 - p2) we get a vector from p2 to p1, it suppose to be the same direction of the two tubes.
+            this._axisRay.get_p00().subtract(other_tube._axisRay.get_p00()).crossProduct(other_tube._axisRay.get_direction());
+        } catch (IllegalArgumentException exception2) {
+            return (isZero(this._radius - other_tube._radius)) &&
+                    (this._axisRay.get_direction().equals(other_tube._axisRay.get_direction())
+                            || this._axisRay.get_direction().equals(other_tube._axisRay.get_direction().scale(-1)));
+        }
         return false;
     }
 

@@ -11,7 +11,8 @@ public abstract class RadialGeometry implements Geometry {
     double _radius;
 
     /**
-     *  Radial Geometry constructor receiving a radius value
+     * Radial Geometry constructor receiving a radius value
+     *
      * @param radius radius value
      */
     public RadialGeometry(double radius) {
@@ -20,6 +21,7 @@ public abstract class RadialGeometry implements Geometry {
 
     /**
      * Copy constructor for Radial Geometry
+     *
      * @param other RadialGeometry
      */
     public RadialGeometry(RadialGeometry other) {
@@ -28,6 +30,7 @@ public abstract class RadialGeometry implements Geometry {
 
     /**
      * Getter operation for the radius field
+     *
      * @return radius of the radial geometry
      */
     public double get_radius() {

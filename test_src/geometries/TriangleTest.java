@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TriangleTest {
     /**
      * Test method for
-     * {@link geometries.Triangle#Triangle(Point3D,Point3D,Point3D)}.
+     * {@link geometries.Triangle#Triangle(Point3D, Point3D, Point3D)}.
      */
     @Test
     public void testGetNormal() {
@@ -22,6 +22,6 @@ class TriangleTest {
         double sqrt3 = Math.sqrt(1d / 3);
         System.out.print(sqrt3);
         System.out.print(tr.getNormal(null));
-        assertEquals( new Vector(sqrt3, sqrt3, sqrt3).scale(-1), tr.getNormal(null),"Bad normal to triangle");
+        assertEquals(new Vector(sqrt3, sqrt3, sqrt3).scale(-1), tr.getNormal(null), "Bad normal to triangle");
     }
 }
