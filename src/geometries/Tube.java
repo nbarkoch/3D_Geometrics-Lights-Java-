@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -96,5 +98,13 @@ public class Tube extends RadialGeometry {
                 '}';
     }
 
-
+    /**
+     * Tube intersection points - could be 0/1/2 points, has no implementation yet
+     * @param ray which could intersect the tube
+     * @return list of points
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
 }

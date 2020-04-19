@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -77,4 +79,13 @@ public class Cylinder extends Tube {
                 '}';
     }
 
+    /**
+     * Cylinder intersection points - could be 0/1/2 points, has no implementation yet
+     * @param ray which could intersect the cylinder
+     * @return list of points
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
 }

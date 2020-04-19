@@ -1,13 +1,16 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Class Triangle is the basic geometric structure which consists of three points in space. The sum of all internal angles
  * in a triangle is always 180&#176; (degrees).
  * <p>
- * e:</p>
+ * NB:</p>
  * <ul>
  * <li>we prefer to implement triangle by composition more than inheritance</li>
  * <li>furthermore, class Triangle isn't kind of Plane.</li>
@@ -41,6 +44,8 @@ public class Triangle extends Polygon {
         if (this == obj) return true;
         if (obj == null || !(obj instanceof Triangle)) return false;
         Triangle other_triangle = (Triangle) obj;
+        // Purpose: Make sure that all vertices of one triangle exist in another triangle
+        // (after they are both known to have 3 points)
         boolean flag;
         for (Point3D vertex : _vertices) {
             flag = false;
@@ -61,5 +66,15 @@ public class Triangle extends Polygon {
         for (Point3D vertex : _vertices)
             output = output + " " + vertex;
         return output;
+    }
+
+    /**
+     * findIntersections method will group all the points which the ray intersect with the class Triangle
+     * @param ray which could intersects the Triangle
+     * @return list of points representing the intersection points of the triangle and ray
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return super.findIntersections(ray);
     }
 }

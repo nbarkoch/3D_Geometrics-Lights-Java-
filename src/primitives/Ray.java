@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 /**
  * Class Ray is the a basic object in geometry - the set of points on a straight line that are on one side relatively
  * to a given point on the straight line called the beginning of the ray. Defined by point and direction (unit vector).
@@ -44,6 +46,9 @@ public class Ray {
         return new Vector(_direction);
     }
 
+    public Point3D get_target_point(double length){
+        return isZero(length) ? _p00 : _p00.add(_direction.scale(length));
+    }
 
     /*************** Admin *****************/
 

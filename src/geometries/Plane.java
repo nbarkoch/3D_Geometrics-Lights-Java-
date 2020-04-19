@@ -1,9 +1,13 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Point3D.ZERO;
+import static primitives.Util.isZero;
 
 /**
  * Class Plane is 2D basic object in geometry which represented by two vectors which come from the same point and
@@ -56,6 +60,11 @@ public class Plane implements Geometry {
         return new Point3D(_p);
     }
 
+    /**
+     * get the vector normal of plane,
+     * @param _point 3D point we supposed is in polygon
+     * @return vector normal (_normal)
+     */
     @Override
     public Vector getNormal(Point3D _point) {
         return new Vector(_normal);
@@ -66,6 +75,12 @@ public class Plane implements Geometry {
         return getNormal(ZERO);
     }
 
+    /**
+     * equals method is for compare between two objects with checking if they have the same details which relevant to the class
+     * in this method we compare details of class Plane, which represent by the vector normal and a 3D point.
+     * @param obj the object to compare
+     * @return boolean result True/False
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -86,5 +101,26 @@ public class Plane implements Geometry {
                 "_p=" + _p +
                 ", _normal=" + _normal +
                 '}';
+    }
+
+    /**
+     * findIntersections method will group all the points which the ray intersect with the class Plane
+     * @param ray which could intersects the Plane
+     * @return list of points representing the intersection points of the plane and ray
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        if (_p.equals(ray.get_p00())) // if ray begin in same point representing the plane
+            return null;
+        Vector v = ray.get_direction();
+        if(isZero(_normal.dotProduct(v))) // if ray parallel to plane (normal orthogonal to ray's direction)
+            return null;
+        Vector u = _p.subtract(ray.get_p00());
+        if(isZero(_normal.dotProduct(u))) // if ray begins in plane
+            return null;
+
+        double t = _normal.dotProduct(u)/_normal.dotProduct(v);
+        // t = 0 - ray begins in plane, t < 0 - ray doesn't intersect the plane
+        return t>0? List.of(ray.get_target_point(t)): null;
     }
 }

@@ -2,7 +2,10 @@ package geometries;
 
 import org.junit.jupiter.api.Test;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,6 +80,7 @@ class PolygonTest {
         } catch (IllegalArgumentException e) {
         }
 
+
         // TC11: Last point = first point
         try {
             new Polygon(
@@ -117,5 +121,29 @@ class PolygonTest {
                 new Point3D(-1, 1, 1));
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals(new Vector(sqrt3, sqrt3, sqrt3).scale(-1), pl.getNormal(new Point3D(0, 0, 1)), "Bad normal to polygon");
+    }
+
+    /**
+     * Test method for {@link geometries.Polygon#findIntersections(primitives.Ray)}.
+     */
+    @Test
+    public void testFindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        Polygon polygon = new Polygon(new Point3D(1,1,2),new Point3D(1,1,-2), new Point3D(1,-3,0), new Point3D(1,-1,3));
+        // TC01: Inside polygon
+        assertEquals( List.of(new Point3D(1.0, -1.0, 1.0)),
+                polygon.findIntersections(new Ray(new Point3D(3, -1, 1), new Vector(-3, 0, 0))),"Ray's line should be in polygon at different point");
+        // TC02: Outside against edge
+        assertNull(polygon.findIntersections(new Ray(new Point3D(3, 0, 2), new Vector(-3, 0, 1))), "Ray's line shouldn't be in polygon");
+        // TC03: Outside against vertex
+        assertNull(polygon.findIntersections(new Ray(new Point3D(4, -1, 3), new Vector(-5, -1, 1))), "Ray's line shouldn't be in polygon");
+
+        // =============== Boundary Values Tests ==================
+        // TC11: Intersect on edge
+        assertNull(polygon.findIntersections(new Ray(new Point3D(2,1,3), new Vector(-4, 0, -0.5))), "Ray's line shouldn't be count in edge of polygon");
+        // TC12: Intersect in vertex
+        assertNull(polygon.findIntersections(new Ray(new Point3D(3, 1, 2), new Vector(-2, 0, 0))), "Ray's line shouldn't be count in vertex of polygon");
+        // TC13: Intersect on edge's continuation
+        assertNull(polygon.findIntersections(new Ray(new Point3D(3,-4,4), new Vector(-5,0, 0))), "Ray's line shouldn't be count in continuation of edge in polygon");
     }
 }

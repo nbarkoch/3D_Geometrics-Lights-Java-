@@ -4,6 +4,7 @@ import java.util.List;
 
 import primitives.*;
 
+import static primitives.Point3D.ZERO;
 import static primitives.Util.*;
 
 /**
@@ -53,7 +54,7 @@ public class Polygon implements Geometry {
         _plane = new Plane(vertices[0], vertices[1], vertices[2]);
         if (vertices.length == 3) return; // no need for more tests for a Triangle
 
-        Vector n = _plane.getNormal();
+        Vector n = _plane.getNormal(ZERO);
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
@@ -80,8 +81,56 @@ public class Polygon implements Geometry {
         }
     }
 
+    /**
+     * Polygon class has imaginary plane, plane has a method getNormal, so we will use his implementation
+     * @param point 3D point we supposed is in polygon
+     * @return normalized vector which represent the normal of the polygon
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
+    }
+
+
+    /**
+     * findIntersections method will group all the points which the ray intersect with the class Polygon
+     * @param ray which could intersects the Polygon
+     * @return list of points representing the intersection points of the polygon and ray
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        // ***First check if ray intersect the imaginary plane that can be created from the polygon
+        List<Point3D> intersections = _plane.findIntersections(ray);
+        if (intersections == null)
+            return null;
+        // ***Next check if it intersect in the polygon
+        // 1.
+        int n = _vertices.size();
+        Vector[] vectors = new Vector[n]; // array of vectors v1,v2...vn
+        int i = 0;
+        for(; i < n; i++)
+            vectors[i] = _vertices.get(i).subtract(ray.get_p00()); //vi = Pi − P0
+        // 2.
+        Vector[] normals = new Vector[n]; // array of vector normals N1,N2...Nn
+        for(i = 0; i < n-1; i++)
+            normals[i] = vectors[i].crossProduct(vectors[i+1]).normalize(); //Ni = normalize (vi × vi+1)
+        normals[i] = (vectors[i].crossProduct(vectors[0])).normalize(); //Vn = normalize (vn × v1)
+        // 3.
+        double result;
+        int last_sign, sign; // sign = 0 -> zero, sign = 1 -> positive, sign = -1 -> negative
+        // let's say i = 0;
+        result = ray.get_direction().dotProduct(normals[0]); // v ∙ N1
+        last_sign = result >= 0? result == 0? 0 : 1: -1;  // result of v ∙ Ni = 0/+/- (value doesn't matter, only if it's zero )
+        for(i = 1; i < n; i++)
+        {
+            result = ray.get_direction().dotProduct(normals[i]);
+            sign = result >= 0? result == 0? 0 : 1: -1;  // v ∙ Ni = 0/+/-
+            if (sign != last_sign || sign == 0) // not all signs are same. or there is a result of 0
+                return null;    // if v ∙ Ni = 0 it means that the ray is intersect the edge(tzelah) of polygon which belong to Ni
+                                // if two normals will result 0 it means that the ray intersect a vertex(nekuda) which belong to the two Ni and Nj
+            last_sign = sign;
+        }
+        // ***Final, it means it does intersect in one point in polygon
+        return intersections;
     }
 }
