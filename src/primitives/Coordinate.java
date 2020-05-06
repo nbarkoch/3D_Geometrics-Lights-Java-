@@ -13,7 +13,7 @@ public final class Coordinate {
      * Coordinate value, intentionally "package-friendly" due to performance
      * constraints
      */
-    final double _coord; // readonly, is internal
+    private final double _coord; // readonly, is internal
 
 
     //********** Constructors ***********/
