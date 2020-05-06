@@ -5,9 +5,9 @@ package primitives;
  * represented by three coordinates (places on x y and z axises)
  */
 public class Point3D {
-    Coordinate _x;
-    Coordinate _y;
-    Coordinate _z;
+    protected Coordinate _x;
+    protected Coordinate _y;
+    protected Coordinate _z;
     // static readonly member point called ZERO
     public final static Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
 
@@ -107,7 +107,6 @@ public class Point3D {
 
     /**
      * The length between two points
-     *
      * @param other_point the second point for calculating th distance
      * @return the number representing the distance
      */

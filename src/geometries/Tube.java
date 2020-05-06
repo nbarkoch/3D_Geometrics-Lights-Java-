@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -50,10 +52,20 @@ public class Tube extends RadialGeometry {
         return new Ray(_axisRay);
     }
 
-    // TODO: implementation
     @Override
     public Vector getNormal(Point3D p) {
-        return null;
+        // Vp = p - p00 (vector from p00 to p)
+        // t = V * Vp (number result represent dotProduct between direction of ray and the Vector Vp)
+        double t = _axisRay.get_direction().dotProduct(p.subtract(_axisRay.get_p00()));
+        // for o point we need to add point p00 as a start point to direction t*V
+        Point3D o = _axisRay.get_p00();
+        if (!isZero(t))  // we can't create the t*V vector if result with direction ZERO
+        {
+            // Scalar multiplication with number t and vector of ray
+            // will give as a vector representing the direction with length from p0 to point o
+            o = o.add(_axisRay.get_direction().scale(t));
+        }
+        return p.subtract(o).normalize(); // .scale(-1) ??
     }
 
 
@@ -86,5 +98,14 @@ public class Tube extends RadialGeometry {
                 '}';
     }
 
-
+    /**
+     * Tube intersection points - could be 0/1/2 points, has no implementation yet
+     *
+     * @param ray which could intersect the tube
+     * @return list of points
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
 }

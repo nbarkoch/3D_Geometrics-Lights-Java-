@@ -8,7 +8,7 @@ import static primitives.Util.alignZero;
  */
 public abstract class RadialGeometry implements Geometry {
 
-    double _radius;
+    protected double _radius;
 
     /**
      * Radial Geometry constructor receiving a radius value
