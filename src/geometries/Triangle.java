@@ -1,13 +1,14 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
+
+import java.util.List;
 
 /**
  * Class Triangle is the basic geometric structure which consists of three points in space. The sum of all internal angles
  * in a triangle is always 180&#176; (degrees).
  * <p>
- * e:</p>
+ * NB:</p>
  * <ul>
  * <li>we prefer to implement triangle by composition more than inheritance</li>
  * <li>furthermore, class Triangle isn't kind of Plane.</li>
@@ -20,29 +21,62 @@ import primitives.Vector;
  */
 public class Triangle extends Polygon {
 
-
     //*********** Constructors ***********//
 
     /**
-     * Constructor of Triangle
+     * Main Constructor of Triangle, with three points, material and emission light color inputs
+     * @param material is the object's effects from lights, three values: diffusion, specular, and shininess.
+     * @param emission represent color of Triangle
+     * @param vertex   first vertex representing the first point of triangle
+     * @param vertex1  second vertex representing the second point of triangle
+     * @param vertex2  third vertex representing the third and last point of triangle
+     */
+    public Triangle(Color emission, Material material, Point3D vertex, Point3D vertex1, Point3D vertex2) {
+        super(emission, material, vertex, vertex1, vertex2);
+    }
+
+    /**
+     * Constructor of Triangle, including emission light color and without material input.
+     * uses the main Constructor of Triangle with material and emission light inputs.
+     *
+     * @param emission represent color of Triangle
+     * @param vertex   first vertex representing the first point of triangle
+     * @param vertex1  second vertex representing the second point of triangle
+     * @param vertex2  third vertex representing the third and last point of triangle
+     */
+    public Triangle(Color emission, Point3D vertex, Point3D vertex1, Point3D vertex2) {
+        this(emission, new Material(0,0,0), vertex, vertex1, vertex2);
+    }
+
+
+    /**
+     * Constructor of class Triangle, without material values and emission light color.
+     * uses the main Constructor of Triangle with material and emission light inputs.
      *
      * @param vertex  first vertex representing the first point of triangle
      * @param vertex1 second vertex representing the second point of triangle
      * @param vertex2 third vertex representing the third and last point of triangle
      */
     public Triangle(Point3D vertex, Point3D vertex1, Point3D vertex2) {
-        super(new Point3D[]{vertex, vertex1, vertex2});
+        this(Color.BLACK, new Material(0,0,0), vertex, vertex1, vertex2);
     }
 
-    /*************** Admin *****************/
 
-    // still not quit sure if class Triangle shouldn't use the equal method which about to be made in polygon class
-    // instead of this one
+    //*************** Admin *****************//
+
+    /**
+     * Triangle method equals
+     *
+     * @param obj to compete with
+     * @return boolean result (same values of the 3 points)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || !(obj instanceof Triangle)) return false;
+        if (!(obj instanceof Triangle)) return false;
         Triangle other_triangle = (Triangle) obj;
+        // Purpose: Make sure that all vertices of one triangle exist in another triangle
+        // (after they are both known to have 3 points)
         boolean flag;
         for (Point3D vertex : _vertices) {
             flag = false;
@@ -63,5 +97,19 @@ public class Triangle extends Polygon {
         for (Point3D vertex : _vertices)
             output = output + " " + vertex;
         return output;
+    }
+
+    /**
+     * findIntersections method will group all the points which the ray intersect with the class Triangle
+     *
+     * @param ray which could intersects the Triangle
+     * @return list of points representing the intersection points of the triangle and ray
+     */
+    @Override
+    public List<GeoPoint> findIntersections(Ray ray) {
+        List<GeoPoint> intersections = super.findIntersections(ray);
+        if (intersections == null) return null;
+        intersections.get(0).geometry = this;
+        return intersections;
     }
 }
