@@ -20,7 +20,7 @@ class VectorTest {
 
         // ============ Equivalence Partitions Tests ============== //
         Vector v12 = v1.subtract(v2);
-        assertEquals(v3, v12, "add function does'nt work properly");
+        assertEquals(v3, v12, "subtract function does'nt work properly");
 
         // =============== Boundary Values Tests ================== //
         try {
