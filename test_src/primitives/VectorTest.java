@@ -150,10 +150,10 @@ class VectorTest {
         // =============== Boundary Values Tests ==================
         // test if normalize can work on a vector with close to zero lengthSquared
         try {
-            v = new Vector(0.000000000001, 0, 0);
+            v = new Vector(0.0000000000001, 0, 0);
             v.normalize(); // we done alignToZero in result of lengthSquared method in class Vector
             fail("Didn't throw divide by zero exception");
-        } catch (ArithmeticException e) {
+        } catch (IllegalArgumentException e) {
             assertTrue(true);
         }
     }
