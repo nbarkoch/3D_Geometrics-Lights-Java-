@@ -70,9 +70,9 @@ class PlaneTest {
         Plane plane1 = new Plane(new Point3D(2, 0, 2), new Point3D(0, 0, 2), new Point3D(0, 0, 0));
         // **** Group: Ray is parallel to the plane
         // TC11: the ray included in the plane
-        assertNull(plane1.findIntersections(new Ray(new Point3D(0.5, -2, 1), new Vector(2, 0, 0))), "Ray's line shouldn't be in plane");
-        // TC12: the ray not included in the plane
         assertNull(plane1.findIntersections(new Ray(new Point3D(0.5, 0, 1), new Vector(2, 0, 0))), "Ray's line shouldn't count as crossing the plane");
+        // TC12: the ray not included in the plane
+        assertNull(plane1.findIntersections(new Ray(new Point3D(0.5, -2, 1), new Vector(2, 0, 0))), "Ray's line shouldn't be in plane");
         // **** Group: Ray is orthogonal to the plane
         // TC13: case which P0 is BEFORE the plane
         assertEquals(List.of(new Point3D(0.5, 0.0, 1.0)),
