@@ -137,5 +137,12 @@ public class CameraIntegrationTest {
                 new Point3D(10, 10, 4),
                 new Point3D(-10, 10, 4));
         assertEquals(16, count_camera_intersections(triangle3, camera1, 4, 4, 2, 4, 4), "wrong number of points, should be 16");
+        
+        // TC24: 3X3 small triangle for no capture
+        Triangle triangle4 = new Triangle(new Point3D(0, 0, 3),
+                new Point3D(4,0,0),
+                new Point3D(-4, 0,0));
+        assertEquals(0, count_camera_intersections(triangle4, camera2,3,3,1,3,3), "wrong number of points, should be 0");
+
     }
 }
