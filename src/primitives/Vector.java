@@ -2,6 +2,7 @@ package primitives;
 
 import geometries.Tube;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 import static primitives.Point3D.ZERO;
 
@@ -10,34 +11,20 @@ import static primitives.Point3D.ZERO;
  * (where a starting point is the beginning of the axis)
  */
 public class Vector {
-
-    Point3D _head;
-
+    protected Point3D _head;
 
     //*********** Constructors ***********//
 
     /**
      * Constructor for creating a vector from a Point3D
      *
-     * @param _head Point3D representing the head
+     * @param head Point3D representing the head
      * @throws IllegalArgumentException in any case of the head point input is the beginning of the axes
      */
-    public Vector(Point3D _head) throws IllegalArgumentException {
+    public Vector(Point3D head) {
         if (_head.equals(ZERO))
             throw new IllegalArgumentException("A vector can't have head point to be the ZERO point");
-        this._head = new Point3D(_head);
-    }
-
-    /**
-     * Constructor for creating a vector by input of three coordinates of the head point
-     *
-     * @param _x coordinate on the x axis
-     * @param _y coordinate on the y axis
-     * @param _z coordinate on the z axis
-     * @throws IllegalArgumentException in case of the three coordinates input value are zero
-     */
-    public Vector(Coordinate _x, Coordinate _y, Coordinate _z) throws IllegalArgumentException {
-        this(new Point3D(_x, _y, _z));
+        this._head = head;
     }
 
     /**
@@ -48,19 +35,15 @@ public class Vector {
      * @param z number representing the place of coordinate in z axis
      * @throws IllegalArgumentException in case of the three numbers input are zero
      */
-    public Vector(double x, double y, double z) throws IllegalArgumentException {
-        this(new Point3D(x, y, z));
+    public Vector(double x, double y, double z) {
+        _head = new Point3D(x, y, z);
+        if (_head.equals(ZERO))
+            throw new IllegalArgumentException("A vector can't have head point to be the ZERO point");
     }
 
-    /**
-     * Copy Constructor for creating a vector from a Vector
-     *
-     * @param _vector Vector representing the vector to build as new one
-     */
-    public Vector(Vector _vector) {
-        this._head = new Point3D(_vector._head);
+    public Vector(Vector other) {
+        _head = other._head;
     }
-
 
     //********** Getters ***********/
 
@@ -70,9 +53,8 @@ public class Vector {
      * @return head of vector value in Point3D representation
      */
     public Point3D get_head() {
-        return new Point3D(_head);
+        return _head;
     }
-
 
     //********** Calculation methods ***********/
 
@@ -80,21 +62,25 @@ public class Vector {
      * Vector Subtraction: Subtraction between two vectors returns a vector with direction from the subtract head point
      * to the subtracted head point.
      *
-     * @param _vector representing the vector we are about to subtract
+     * @param vector representing the vector we are about to subtract
      * @return a vector from the second vector's head point to the first vector's head point at which the action is performed.
+     * @throws IllegalArgumentException if result is ZERO point - there will be exception in Constructor
      */
-    public Vector subtract(Vector _vector) {
-        return new Vector(_head.subtract(_vector.get_head()));
+    public Vector subtract(Vector vector) {
+        return _head.subtract(vector._head);
     }
 
     /**
      * Vector interconnect: Returns a new vector whose head is a point containing the interconnect result of two vector
      *
-     * @param _vector a vector which his head point value added to the first vector's head point, by that we have a new point
+     * @param vector a vector which his head point value added to the first vector's head point, by that we have a new point
      * @return a new vector whose head point coordinate values are the result of the vector interconnect operation
+     * @throws IllegalArgumentException if result is ZERO point - there will be exception in Constructor
      */
-    public Vector add(Vector _vector) {
-        return new Vector(_head.add(_vector));
+    public Vector add(Vector vector) {
+        return new Vector(_head._x._coord + vector._head._x._coord,
+                _head._y._coord + vector._head._y._coord,
+                _head._z._coord + vector._head._z._coord);
     }
 
     /**
@@ -102,11 +88,12 @@ public class Vector {
      *
      * @param c scalar which is for to be multiplied by the coordinate values of a point of a vector
      * @return a new vector contains a point which it's value represent the result of the multiplication operation
+     * @throws IllegalArgumentException if result is ZERO point - there will be exception in Constructor
      */
     public Vector scale(double c) {
-        return new Vector(_head._x.get() * c,
-                _head._y.get() * c,
-                _head._z.get() * c);
+        return new Vector(_head._x._coord * c,
+                _head._y._coord * c,
+                _head._z._coord * c);
     }
 
     /**
@@ -116,21 +103,23 @@ public class Vector {
      * @return dot product (double)
      */
     public double dotProduct(Vector other) {
-        return _head._x.get() * other._head._x.get() +
-                _head._y.get() * other._head._y.get() +
-                _head._z.get() * other._head._z.get();
+        return _head._x._coord * other._head._x._coord +
+                _head._y._coord * other._head._y._coord +
+                _head._z._coord * other._head._z._coord;
     }
 
     /**
      * Vector Multiplier - Returns a new vector that is perpendicular to the two existing vectors (cross-product)
      *
-     * @param _vector the other Vector which we about to do on him the cross product
+     * @param vector the other Vector which we about to do on him the cross product
      * @return Vector for cross product using right thumb rule
+     * @throws IllegalArgumentException if result is ZERO point - there will be exception in Constructor
      */
-    public Vector crossProduct(Vector _vector) {
-        return new Vector(this._head._y.get() * _vector._head._z.get() - this._head._z.get() * _vector._head._y.get(),
-                this._head._z.get() * _vector._head._x.get() - this._head._x.get() * _vector._head._z.get(),
-                this._head._x.get() * _vector._head._y.get() - this._head._y.get() * _vector._head._x.get());
+    public Vector crossProduct(Vector vector) {
+        return new Vector(
+                this._head._y._coord * vector._head._z._coord - this._head._z._coord * vector._head._y._coord,
+                this._head._z._coord * vector._head._x._coord - this._head._x._coord * vector._head._z._coord,
+                this._head._x._coord * vector._head._y._coord - this._head._y._coord * vector._head._x._coord);
     }
 
     /**
@@ -139,7 +128,7 @@ public class Vector {
      * @return the number representing the sum of values in the vector's head point, squared
      */
     public double lengthSquared() {
-        return dotProduct(this);
+        return alignZero(dotProduct(this));
     }
 
     /**
@@ -157,10 +146,11 @@ public class Vector {
      * the action also return the vector for concatenation of operations if necessary
      *
      * @return the vector after it normalized
+     * @throws ArithmeticException - if length of vector is too short (close to zero) we can't divide by zero.
      */
-    public Vector normalize() {
+    public Vector normalize() throws ArithmeticException {
         if (isZero(length())) // if we try to normalize vector ZERO
-            return this; // can't davide by zero
+            throw new ArithmeticException("divide by Zero");
         this._head = scale(1 / length())._head;
         return this;
     }
@@ -175,6 +165,24 @@ public class Vector {
         return (new Vector(this)).normalize();
     }
 
+    /**
+     * methoid which create an orthogonal vector to the current instance
+     * @return the new orthogonal vector
+     */
+    public Vector getOrthogonal2() {
+        double[] board = {_head._x._coord, _head._y._coord, _head._z._coord};
+        // technique of creating orthogonal vector which prevent from creating vector zero.
+        if (board[0] < board[1] && board[0] < board[2])  // x , y , z, -- x = 0, -z, y
+            return new Vector(0, -board[2], board[1]).normalize();
+        if (board[1] < board[0] && board[1] < board[2])  // x , y , z, -- y = -z, 0, x
+            return new Vector(-board[2], 0, board[1]).normalize();
+        // x , y , z, -- z = -y, x, 0
+        return new Vector(-board[1], board[0], 0).normalize();
+    }
+
+    public Vector getOrthogonal() {
+        return new Vector(-_head._z._coord, 0, _head._x._coord).normalize();
+    }
 
     /*************** Admin *****************/
 

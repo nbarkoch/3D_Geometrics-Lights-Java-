@@ -8,6 +8,7 @@
 
 import primitives.*;
 
+import static java.lang.Math.max;
 import static java.lang.System.out;
 import static primitives.Util.*;
 //import geometries.Sphere;
@@ -25,6 +26,14 @@ public final class Main {
      * @param args irrelevant here
      */
     public static void main(String[] args) {
+        // min = 5, max = 10
+        double num = 5 + (Math.random() * ((10 - 5)));
+        System.out.println(num);
+        int numRays = 77;
+        System.out.println((int) Math.sqrt(numRays) * (int) Math.sqrt(numRays) == numRays);
+
+        double rayMoveX = 10;
+        double random_move = -0.5 * rayMoveX + (Math.random() * ((0.5 * rayMoveX + 0.5 * rayMoveX)));
 
         try { // test zero vector
             new Vector(0, 0, 0);
@@ -77,4 +86,5 @@ public final class Main {
         //Sphere sp = new Sphere(v.get_head(),2.222);
         //sp.get_radius();
     }
+
 }

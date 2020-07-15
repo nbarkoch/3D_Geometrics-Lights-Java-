@@ -5,9 +5,9 @@ package primitives;
  * represented by three coordinates (places on x y and z axises)
  */
 public class Point3D {
-    Coordinate _x;
-    Coordinate _y;
-    Coordinate _z;
+    final Coordinate _x;
+    final Coordinate _y;
+    final Coordinate _z;
     // static readonly member point called ZERO
     public final static Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
 
@@ -17,14 +17,14 @@ public class Point3D {
     /**
      * Constructor for creating a point by input of three coordinates
      *
-     * @param _x coordinate on the x axis
-     * @param _y coordinate on the y axis
-     * @param _z coordinate on the z axis
+     * @param x coordinate on the x axis
+     * @param y coordinate on the y axis
+     * @param z coordinate on the z axis
      */
-    public Point3D(Coordinate _x, Coordinate _y, Coordinate _z) {
-        this._x = _x;
-        this._y = _y;
-        this._z = _z;
+    public Point3D(Coordinate x, Coordinate y, Coordinate z) {
+        this._x = x;
+        this._y = y;
+        this._z = z;
     }
 
     /**
@@ -35,35 +35,54 @@ public class Point3D {
      * @param z number representing the place of coordinate in z axis
      */
     public Point3D(double x, double y, double z) {
-        this(new Coordinate(x), new Coordinate(y), new Coordinate(z));
+        _x = new Coordinate(x);
+        _y = new Coordinate(y);
+        _z = new Coordinate(z);
     }
-
-    /**
-     * Copy Constructor for creating a point by input of other point
-     *
-     * @param _point representing a point, including three coordinates
-     */
-    public Point3D(Point3D _point) {
-        this(_point._x.get(), _point._y.get(), _point._z.get());
-    }
-
 
     //********** Getters ***********/
 
     /**
-     * @return new Coordinate with _x value
+     * @return the Coordinate with _x value
      */
     public Coordinate get_x() {
-        return new Coordinate(_x);
+        return _x;
     }
-
+    /**
+     * @return the Coordinate with _y value
+     */
     public Coordinate get_y() {
-        return new Coordinate(_y);
+        return _y;
+    }
+    /**
+     * @return the Coordinate with _z value
+     */
+    public Coordinate get_z() {
+        return _z;
     }
 
-    public Coordinate get_z() {
-        return new Coordinate(_z);
+
+    /**
+     * @return the value of coordinate _x
+     */
+    public double getX() {
+        return _x._coord;
     }
+
+    /**
+     * @return the value of coordinate _y
+     */
+    public double getY() {
+        return _y._coord;
+    }
+
+    /**
+     * @return the value of coordinate _z
+     */
+    public double getZ() {
+        return _z._coord;
+    }
+
 
 
     //********** Calculation methods ***********/
@@ -76,21 +95,21 @@ public class Point3D {
      */
     public Vector subtract(Point3D vertex) {
         return new Vector(
-                new Point3D(this._x.get() - vertex._x.get(),
-                        this._y.get() - vertex._y.get(),
-                        this._z.get() - vertex._z.get()));
+                this._x._coord - vertex._x._coord,
+                this._y._coord - vertex._y._coord,
+                this._z._coord - vertex._z._coord);
     }
 
     /**
      * Adding Vector to a Point - Returns a new point, by doing interconnect operation the vector's head point and the point
      *
-     * @param _vector a vector which his point value added to the point
+     * @param vector a vector which his point value added to the point
      * @return a new point whose coordinate values are the result of the points interconnect operation
      */
-    public Point3D add(Vector _vector) {
-        return new Point3D(this._x.get() + _vector._head._x.get(),
-                this._y.get() + _vector._head._y.get(),
-                this._z.get() + _vector._head._z.get());
+    public Point3D add(Vector vector) {
+        return new Point3D(this._x._coord + vector._head._x._coord,
+                this._y._coord + vector._head._y._coord,
+                this._z._coord + vector._head._z._coord);
     }
 
     /**
@@ -100,9 +119,9 @@ public class Point3D {
      * @return the number representing the distance squared
      */
     public double distanceSquared(Point3D other_point) {
-        return (this._x.get() - other_point._x.get()) * (this._x.get() - other_point._x.get()) +
-                (this._y.get() - other_point._y.get()) * (this._y.get() - other_point._y.get()) +
-                (this._z.get() - other_point._z.get()) * (this._z.get() - other_point._z.get());
+        return (this._x._coord - other_point._x._coord) * (this._x._coord - other_point._x._coord) +
+                (this._y._coord - other_point._y._coord) * (this._y._coord - other_point._y._coord) +
+                (this._z._coord - other_point._z._coord) * (this._z._coord - other_point._z._coord);
     }
 
     /**
@@ -121,7 +140,7 @@ public class Point3D {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;                       // step 1 - we are talking about the same point
-        if (o == null || getClass() != o.getClass())
+        if (o == null || !(o instanceof Point3D))
             return false;                                 // step 2 - we are talking about object which isn't a point or null
         Point3D point3D = (Point3D) o;                    // step 3 - let's treat it as a point, and check coordinates
         return this._x.equals(point3D._x) &&
@@ -136,4 +155,6 @@ public class Point3D {
                 ", " + _z +
                 ')';
     }
+
+
 }

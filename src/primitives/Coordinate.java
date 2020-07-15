@@ -28,15 +28,6 @@ public final class Coordinate {
         _coord = alignZero(coord);
     }
 
-    /**
-     * Copy constructor for coordinate
-     *
-     * @param other Coordinate for deep copy values
-     */
-    public Coordinate(Coordinate other) {
-        _coord = other._coord;
-    }
-
 
     //********** Getters ***********/
 
