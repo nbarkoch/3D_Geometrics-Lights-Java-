@@ -8,7 +8,7 @@ import primitives.Vector;
 /**
  * interface for all 3D geometry objects with material and emission fields, and getNormal method (and has the possibility to be intersected)
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
     protected Color _emission;
     protected Material _material;
 

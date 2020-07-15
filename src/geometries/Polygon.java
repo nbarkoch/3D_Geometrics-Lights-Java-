@@ -200,6 +200,26 @@ public class Polygon extends Geometry {
         return intersections;
     }
 
+    /**
+     * method sets the values of the bounding volume for the intersectable polygon
+     */
+    @Override
+    public void setBoundingRegion() {
+        super.setBoundingRegion();
+        double minX, maxX, minY, maxY, minZ, maxZ;
+        minX = minY = minZ = Double.POSITIVE_INFINITY;
+        maxX = maxY = maxZ = Double.NEGATIVE_INFINITY;
+        for (Point3D vertex : _vertices) {
+            minX = Math.min(vertex.getX(), minX);
+            maxX = Math.max(vertex.getX(), maxX);
+            minY = Math.min(vertex.getY(), minY);
+            maxY = Math.max(vertex.getY(), maxY);
+            minZ = Math.min(vertex.getZ(), minZ);
+            maxZ = Math.max(vertex.getZ(), maxZ);
+        }
+        _boundingBox.setBoundingBox(minX, maxX, minY, maxY, minZ, maxZ);
+    }
+
     //*************** Admin *****************//
 
     /**

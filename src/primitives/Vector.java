@@ -1,7 +1,5 @@
 package primitives;
 
-import geometries.Tube;
-
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 import static primitives.Point3D.ZERO;
@@ -165,21 +163,26 @@ public class Vector {
         return (new Vector(this)).normalize();
     }
 
+    ///**
+    // * methoid which create an orthogonal vector to the current instance
+    // * @return the new orthogonal vector
+    // */
+    //public Vector getOrthogonal2() {
+    //    double[] board = {_head._x._coord, _head._y._coord, _head._z._coord};
+    //    // technique of creating orthogonal vector which prevent from creating vector zero.
+    //    if (board[0] < board[1] && board[0] < board[2])  // x , y , z, -- x = 0, -z, y
+    //        return new Vector(0, -board[2], board[1]).normalize();
+    //    if (board[1] < board[0] && board[1] < board[2])  // x , y , z, -- y = -z, 0, x
+    //        return new Vector(-board[2], 0, board[1]).normalize();
+    //    // x , y , z, -- z = -y, x, 0
+    //    return new Vector(-board[1], board[0], 0).normalize();
+    //}
+
     /**
-     * methoid which create an orthogonal vector to the current instance
+     * method which create an orthogonal vector to the current instance
+     * technique of creating orthogonal vector which prevent from creating vector zero.
      * @return the new orthogonal vector
      */
-    public Vector getOrthogonal2() {
-        double[] board = {_head._x._coord, _head._y._coord, _head._z._coord};
-        // technique of creating orthogonal vector which prevent from creating vector zero.
-        if (board[0] < board[1] && board[0] < board[2])  // x , y , z, -- x = 0, -z, y
-            return new Vector(0, -board[2], board[1]).normalize();
-        if (board[1] < board[0] && board[1] < board[2])  // x , y , z, -- y = -z, 0, x
-            return new Vector(-board[2], 0, board[1]).normalize();
-        // x , y , z, -- z = -y, x, 0
-        return new Vector(-board[1], board[0], 0).normalize();
-    }
-
     public Vector getOrthogonal() {
         return new Vector(-_head._z._coord, 0, _head._x._coord).normalize();
     }

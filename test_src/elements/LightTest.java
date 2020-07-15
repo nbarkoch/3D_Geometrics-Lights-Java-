@@ -323,6 +323,7 @@ public class LightTest {
                 new SpotLight(new Color(300, 300, 0), new Point3D(70, 76, -60),
                         new Vector(-1, 1, 2), 1, 0.00001, 0.0000004)
         );
+        scene.getGeometries().setBoundingRegion();
         ImageWriter imageWriter = new ImageWriter("sphereDirectionalPointSpot_ss", 150, 150, 500, 500);
         Render render = new Render(imageWriter, scene).setMultithreading(3);
 
@@ -354,6 +355,7 @@ public class LightTest {
                 new SpotLight(new Color(300, 300, 0), new Point3D(70, 76, -60),
                         new Vector(-1, 1, 2), 1, 0.00001, 0.0000004)
         );
+        scene.getGeometries().setBoundingRegion();
         ImageWriter imageWriter = new ImageWriter("sphereDirectionalPointSpot_dof", 150, 150, 500, 500);
         Render render = new Render(imageWriter, scene).setMultithreading(3);
 
@@ -387,6 +389,7 @@ public class LightTest {
                 new SpotLight(new Color(300, 300, 0), new Point3D(70, 76, -60),
                         new Vector(-1, 1, 2), 1, 0.00001, 0.0000004)
         );
+        scene.getGeometries().setBoundingRegion();
         ImageWriter imageWriter = new ImageWriter("sphereDirectionalPointSpot_ss_dof", 150, 150, 500, 500);
         Render render = new Render(imageWriter, scene).setMultithreading(3);
 

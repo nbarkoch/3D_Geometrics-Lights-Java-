@@ -50,6 +50,8 @@ public class BeamOfRaysTests {
 
         );
 
+        scene.getGeometries().setBoundingRegion();
+        scene.getGeometries().boundingVolumeHierarchy();
 
         scene.addLights(
                 new SpotLight(new Color(330, 220, 220), //
@@ -77,7 +79,7 @@ public class BeamOfRaysTests {
         Scene scene = new Scene("Test scene");
         //scene.setCamera(new Camera(new Point3D(-200, 100, -500), new Vector(0.65, 0.05, 1), new Vector(0, -1, 0.05)));
         scene.setCamera(new Camera(new Point3D(0, 100, -600), new Vector(0, 0.04, 1), new Vector(0, -1, 0.04))
-                .setDepthOfField(100, 400, 90)
+                //.setDepthOfField(100, 400, 90)
         );
         scene.setDistance(1150);
         scene.setBackground(Color.BLACK);
@@ -397,8 +399,8 @@ public class BeamOfRaysTests {
                         new Point3D(250, 150, 415), new Point3D(-250, 150, 415))
         );
 
-        Geometries surface2 = new Geometries(
-                pattern(10, 10, 25));
+        //Geometries surface2 = new Geometries(
+        //        pattern(10, 10, 25));
 
         Geometries geoMole23 = new Geometries(geoMolecule2, geoMolecule3);
         Geometries geoMole123 = new Geometries(geoMolecule1, geoMole23);
@@ -413,6 +415,10 @@ public class BeamOfRaysTests {
                         new Point3D(250, -450, 415), new Point3D(-250, -450, 415))
         );
 
+        scene.getGeometries().setBoundingRegion();
+        scene.getGeometries().boundingVolumeHierarchy();
+        System.out.println("Hierarchy Tree:\n" + scene.getGeometries().hierarchyTree());
+
 
         scene.addLights(
                 new SpotLight(new Color(400, 360, 360), //
@@ -422,8 +428,8 @@ public class BeamOfRaysTests {
                 new DirectionalLight(new Color(20, 10, 10), new Vector(5, 1, 3))
         );
         ImageWriter imageWriter = new ImageWriter("picture radialGeometriesOnSurface", 500, 277.77, 900, 500);
-        //Render render = new Render(imageWriter, scene).setDebugPrint().setSoftShadows(81);
-        Render render = new Render(imageWriter, scene).setDebugPrint().setMultithreading(3);
+        //Render render = new Render(imageWriter, scene).setDebugPrint();
+        Render render = new Render(imageWriter, scene).setDebugPrint().setMultithreading(3).setSoftShadows(81);
         render.renderImage();
         render.writeToImage();
     }

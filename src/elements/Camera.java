@@ -1,6 +1,5 @@
 package elements;
 
-import geometries.Intersectable;
 import primitives.*;
 
 import java.util.ArrayList;

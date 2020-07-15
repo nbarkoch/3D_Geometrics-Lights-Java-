@@ -169,4 +169,22 @@ public class Cylinder extends Tube {
         return intersectionsCylinder;
     }
 
+    /**
+     * method sets the values of the bounding volume for the intersectable cylinder
+     */
+    @Override
+    public void setBoundingRegion() {
+        if (_boundingBox == null)
+            _boundingBox = new BoundingBox();
+        Point3D A = _axisRay.get_p00();
+        Point3D B = _axisRay.get_target_point(_height);
+        _boundingBox.setBoundingBox(
+                Math.min(A.getX(), B.getX()) - _radius,
+                Math.max(A.getX(), B.getX()) + _radius,
+                Math.min(A.getY(), B.getY()) - _radius,
+                Math.max(A.getY(), B.getY()) + _radius,
+                Math.min(A.getZ(), B.getZ()) - _radius,
+                Math.max(A.getZ(), B.getZ()) + _radius);
+    }
+
 }

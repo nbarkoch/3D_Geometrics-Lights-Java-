@@ -356,7 +356,7 @@ public class Render {
      * @return a geo point of the intersection
      */
     private GeoPoint findClosestIntersection(Ray ray) {
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersectBoundingRegion(ray);
         return intersections != null && !intersections.isEmpty() ? getClosestPoint(intersections, ray.get_p00()) : null;
     }
 
@@ -538,7 +538,7 @@ public class Render {
         // Step: calculate the average transparency of all the transparencies which created from each light ray
         for (Ray lightRay : lightRays) {
             ktr = 1.0;
-            List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay, lightDistance);
+            List<GeoPoint> intersections = _scene.getGeometries().findIntersectBoundingRegion(lightRay, lightDistance);
             if (intersections == null) {
                 averageKtr += 1.0 * weight; // no shadow exist for this ray
                 continue;                 // move to next ray
